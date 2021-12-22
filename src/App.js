@@ -1,25 +1,32 @@
-import logo from './logo.svg';
+import logo, { ReactComponent } from './logo.svg';
 import './App.css';
+import React from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const userName = prompt("Як тебе звати?", "");
+// const isUserLoggedIn = true / false;
+const isUserLoggedIn = true;
+let users = [
+  { f: "Іра", l: "Петренко" },
+  { f: "Аня", l: 'Коваленко' },
+  { f: "Юля", l: 'Гнатенко' }
+];
+
+function fullName(user) {
+  return user.f + ' ' + user.l;
+}
+
+class App extends React.Component {
+  render() {
+    return <React.Fragment>
+      <h1>Привіт, {userName}!</h1>
+      {(isUserLoggedIn === true) ? <p>Користувач залогований</p>
+        : <p>Вам потрібно залогуватись</p>}
+      <h2>Список користувачів</h2>
+      <ul>
+        {users.map(user => <li>{fullName(user)}</li>)}
+      </ul>
+    </React.Fragment>
+  }
 }
 
 export default App;
